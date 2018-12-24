@@ -61,35 +61,39 @@ class MatchController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function move($id) {
+        
         $match = Match::find($id);
 
-        $board = json_decode($match->board, true);
-        $player = $next = $match->next;
+        if(!$match->winner){
 
-        switch ($player) {
-            case '1':
-                $next = '2';
-                break;
-            case '2':
-                $next = '1';
-                break;
-        }
-
-        $position = Input::get('position');
-        $checkPosition = $board[$position] == 0 && $board[$position] != $player;
-
-        if($checkPosition){
-            $board[$position] = $player;
-            if(array_sum($board) > 0){
-                $winner = $this->checkWinner($board);
-                $response = Match::where('id', $id)->update([
-                    'next' => $next,
-                    'winner' => $winner,
-                    'board' => json_encode($board)
-                ]);
+            $board = json_decode($match->board, true);
+            $player = $next = $match->next;
+    
+            switch ($player) {
+                case '1':
+                    $next = '2';
+                    break;
+                case '2':
+                    $next = '1';
+                    break;
+            }
+    
+            $position = Input::get('position');
+            $checkPosition = $board[$position] == 0 && $board[$position] != $player;
+    
+            if($checkPosition){
+                $board[$position] = $player;
+                if(array_sum($board) > 0){
+                    $winner = $this->checkWinner($board);
+                    $response = Match::where('id', $id)->update([
+                        'next' => $next,
+                        'winner' => $winner,
+                        'board' => json_encode($board)
+                    ]);
+                }
             }
         }
-        
+
         return $this->match($id);
 
     }
@@ -176,7 +180,8 @@ class MatchController extends Controller {
         
         $matches = [];
 
-        $rows = Match::where('winner','=',0)->get();
+        // $rows = Match::where('winner','=',0)->get();
+        $rows = Match::all();
 
         foreach ($rows as $key => $match) {
             $matches[] = array(
