@@ -3,10 +3,19 @@ ___
 
 ## The challenge
 
-We want to play Tic Tac Toe. As we are a remote friendly company, we want to be able to play without distance being a challenge to find the best players in the world ;)
+Tic Tac Toe game in PHP where application permits to create a lot of rounds and allow 2 people per gameplay. The game identify the winner and list available matches where is the round don't has a winner yet.
+
+## How to play
+
+- Create a new match and join it
+- Invite another friend to join
+- Playing and be the winner :)
 
 
 ## Running the application
+
+The application run with docker, so please make a chmod 777 in storage folder from laravel for that application can run without problems.
+
 [Install docker and docker-compose](https://docs.docker.com/compose/install/)
 
 Then run
