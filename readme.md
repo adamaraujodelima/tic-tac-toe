@@ -3,7 +3,7 @@ ___
 
 ## The challenge
 
-Tic Tac Toe game in PHP where application permits to create a lot of rounds and allow 2 people per gameplay. The game identify the winner and list available matches where is the round don't has a winner yet.
+Tic Tac Toe game in PHP where application permits to create a lot of rounds and allow 2 people per gameplay. The game identify the winner and list available matches to play or rounds already played.
 
 ## How to play
 
